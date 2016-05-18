@@ -1,3 +1,6 @@
 # Jetbrain IDE files
 .idea/*
 
+# ignore rake cacher
+.rake_t_cache
+

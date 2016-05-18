@@ -1,0 +1,20 @@
+default: &default
+  host: localhost
+  port: 5432
+  adapter: postgresql
+  encoding: utf-8
+  pool: 5
+  username: jack
+  password: password
+
+development:
+  <<: *default
+  database: planter_development
+
+test: &test
+  <<: *default
+  database: planter_test
+
+production:
+  <<: *default
+  database: planter
