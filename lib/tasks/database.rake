@@ -1,5 +1,6 @@
 # This file contains rake tasks for working with database.
 require 'yaml'
+require 'fileutils'
 
 def db_uri
   dbconf = CONFIG[ENVIRONMENT]
@@ -20,16 +21,19 @@ def build_blank_migration
 end
 
 def next_migration_prefix
-  Dir.entries(MIGRATION_LOCATION).sort.last.to_i + 1
+  mkdir_p(MIGRATION_LOCATION) unless Dir.exist? MIGRATION_LOCATION
+  Dir.entries(MIGRATION_LOCATION).sort.last.to_i + 1 || 0
 end
 
-PROJECT_ROOT = File.expand_path(File.join(__FILE__, '..', '..', '..'))
 CONFIG_FILE = (PROJECT_ROOT + '/config/database.yml').freeze
 raise "Config file not found.
 Config file must be located at #{CONFIG_FILE}" unless File.exist?(CONFIG_FILE)
 CONFIG = YAML.load_file(CONFIG_FILE).freeze
-ENVIRONMENT = ENV['RACK_ENV'] || 'development'
-MIGRATION_LOCATION = (PROJECT_ROOT + '/db/migrate').freeze
+CX_ID = ENV['CX']
+DB_CONFIG = YAML.load_file(File.expand_path(File.join(PROJECT_ROOT, 'config', 'database.yml')))
+ENVIRONMENT = (ENV['RACK_ENV'] || 'development').freeze
+MODE ||= 'development'.freeze
+MIGRATION_LOCATION = File.join(PROJECT_ROOT, DB_CONFIG[ENVIRONMENT]['migration_location']).freeze
 
 namespace :pg do
   require 'pg'

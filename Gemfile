@@ -6,12 +6,15 @@ gem 'sequel'
 gem 'sequel_pg'
 
 group :development do
-  gem 'rake'
   gem 'guard'
   gem 'guard-bundler'
+  gem 'rake'
+  gem 'rubocop'
+  gem 'timecop'
 end
 
 group :test do
-  gem 'rspec'
   gem 'database_cleaner'
+  gem 'factory_girl'
+  gem 'rspec'
 end
