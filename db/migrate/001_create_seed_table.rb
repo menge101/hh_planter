@@ -5,7 +5,7 @@ Sequel.migration do
       String       :term,           null: false
       DateTime     :created_at,     null: false
       DateTime     :updated_at,     null: false
-      DateTime     :last_processed
+      DateTime     :last_planted
     end
   end
 

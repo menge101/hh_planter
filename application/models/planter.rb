@@ -1,29 +1,25 @@
-require 'pg'
-require 'sequel'
-require 'sequel/extensions/migration'
-require 'yaml'
-
 # This class coordinates everything.  What seeds not planted, communicating with the google search
 # and posting results to the redis queue
 class Planter
-
-  def initialize(mode=ENVIRONMENT)
-    @db = Sequel.postgres(DB_CONFIG[mode])
-    Sequel::Migrator.check_current(@db, MIGRATION_LOCATION)
+  def initialize
+    @db = DB
   end
 
   def plant
-
+    seeds_to_plant = find_seeds
+    seeds_to_plant.each do |seed|
+      seed.last_planted = Time.now
+      seed.save
+    end
   end
 
   private
 
   def query_custom_search(term)
-
+    # TODO
   end
 
   def find_seeds
-
+    Seed.all
   end
-
 end

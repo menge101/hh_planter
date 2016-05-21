@@ -4,3 +4,8 @@
 # ignore rake cacher
 .rake_t_cache
 
+# ignore rspec examples file
+/spec/examples.txt
+
+# do not check in the serets YAML file!
+/config/secrets.yml
