@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
 
+gem 'httparty'
 gem 'pg'
 gem 'sequel'
 gem 'sequel_pg'
@@ -16,5 +17,6 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'factory_girl'
+  gem 'fakeweb'
   gem 'rspec'
 end

@@ -1,12 +1,14 @@
 ENVIRONMENT = (ENV['RACK_ENV'] || 'test').freeze
 PROJECT_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..')).freeze
 $LOAD_PATH.unshift(File.expand_path(File.join(PROJECT_ROOT, 'config')))
-require 'system'
+require 'database'
 Dir.glob(File.expand_path(File.join(PROJECT_ROOT, 'application', '**/*.rb'))).each { |f| require f }
 
 require 'factory_girl'
+require 'fakeweb'
 require 'timecop'
 require 'database_cleaner'
+require 'yaml'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -32,6 +34,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation) if ENVIRONMENT == 'test'
+    FakeWeb.allow_net_connect = false
   end
 
   config.around(:each) do |example|

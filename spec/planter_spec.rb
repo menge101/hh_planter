@@ -1,6 +1,9 @@
 RSpec.describe Planter do
   before(:each) do
-    @planter = Planter.new
+    config = YAML.load_file(File.join(PROJECT_ROOT, 'config', 'secrets.yml'))['google'].freeze
+    search = GoogleCustomSearch.new(config['custom_search_api'],
+                                    config['engine_id'])
+    @planter = Planter.new(DB,search,nil)
   end
 
   context 'with 1 unplanted seed' do

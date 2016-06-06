@@ -1,8 +1,10 @@
 # This class coordinates everything.  What seeds not planted, communicating with the google search
 # and posting results to the redis queue
 class Planter
-  def initialize
-    @db = DB
+  def initialize(database, query_gateway, redis_conn)
+    @db = database
+    @search = query_gateway
+    @queue = redis_conn
   end
 
   def plant
@@ -16,7 +18,7 @@ class Planter
   private
 
   def query_custom_search(term)
-    # TODO
+    @search.search(term)
   end
 
   def find_seeds

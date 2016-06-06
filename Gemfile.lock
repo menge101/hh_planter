@@ -13,6 +13,7 @@ GEM
     diff-lcs (1.2.5)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
+    fakeweb (1.3.0)
     ffi (1.9.10)
     formatador (0.2.5)
     guard (2.13.0)
@@ -29,6 +30,9 @@ GEM
       guard (~> 2.2)
       guard-compat (~> 1.1)
     guard-compat (1.2.1)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
     listen (3.1.4)
@@ -38,6 +42,7 @@ GEM
     lumberjack (1.0.10)
     method_source (0.8.2)
     minitest (5.9.0)
+    multi_xml (0.5.5)
     nenv (0.3.0)
     notiffany (0.0.8)
       nenv (~> 0.1)
@@ -95,8 +100,10 @@ PLATFORMS
 DEPENDENCIES
   database_cleaner
   factory_girl
+  fakeweb
   guard
   guard-bundler
+  httparty
   pg
   rake
   rspec
