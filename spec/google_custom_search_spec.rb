@@ -7,7 +7,7 @@ RSpec.describe GoogleCustomSearch do
   end
 
   context 'when I query pittsburgh' do
-    let (:term) { 'pittsburgh' }
+    let(:term) { 'pittsburgh' }
     it 'gets a 200 response' do
       last_response = @search.search(term)
       expect(last_response.code).to eq 200

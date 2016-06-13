@@ -1,12 +1,12 @@
 require 'httparty'
-# This is a gateway class that facilitates communication with Google Custom Search
 
+# This is a gateway class that facilitates communication with Google Custom Searc
 class GoogleCustomSearch
   include HTTParty
   base_uri 'https://www.googleapis.com/customsearch/v1'
 
   def initialize(api_key, engine_id)
-    @credentials = {key: api_key, cx: engine_id }
+    @credentials = { key: api_key, cx: engine_id }
   end
 
   def search(query)

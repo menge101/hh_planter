@@ -84,7 +84,14 @@ namespace :pg do
     task :drop do
       con = PG.connect(dbname: 'postgres')
       con.exec("DROP DATABASE IF EXISTS #{CONFIG[ENVIRONMENT]['database']}")
-      puts "Database Database #{CONFIG[ENVIRONMENT]['database']} dropped."
+      puts "Database #{CONFIG[ENVIRONMENT]['database']} dropped."
+    end
+
+    desc 'Rebuilds the database'
+    task :rebuild do
+      %w(pg:db:drop pg:db:create pg:migrations:migrate).each do |cmd|
+        Rake::Task[cmd].invoke
+      end
     end
   end
 

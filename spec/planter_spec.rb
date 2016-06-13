@@ -3,7 +3,7 @@ RSpec.describe Planter do
     config = YAML.load_file(File.join(PROJECT_ROOT, 'config', 'secrets.yml'))['google'].freeze
     search = GoogleCustomSearch.new(config['custom_search_api'],
                                     config['engine_id'])
-    @planter = Planter.new(DB,search,nil)
+    @planter = Planter.new(DB, search, nil)
   end
 
   context 'with 1 unplanted seed' do
@@ -27,6 +27,15 @@ RSpec.describe Planter do
           expect(seed.refresh.last_planted).to eq Time.now
         end
       end
+    end
+  end
+
+  context 'a seed with term Pittsburgh exists' do
+    before(:each) do
+      FactoryGirl.create(:seed, term: 'Pittsburgh')
+    end
+    it 'cannot create another seed with term Pittsburgh' do
+      expect { FactoryGirl.create(:seed, term: 'Pittsburgh') }.to raise_error(Sequel::UniqueConstraintViolation)
     end
   end
 end

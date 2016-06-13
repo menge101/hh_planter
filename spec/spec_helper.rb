@@ -1,13 +1,13 @@
 ENVIRONMENT = (ENV['RACK_ENV'] || 'test').freeze
 PROJECT_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..')).freeze
 $LOAD_PATH.unshift(File.expand_path(File.join(PROJECT_ROOT, 'config')))
-require 'database'
+require 'environment'
 Dir.glob(File.expand_path(File.join(PROJECT_ROOT, 'application', '**/*.rb'))).each { |f| require f }
 
+require 'database_cleaner'
 require 'factory_girl'
 require 'fakeweb'
 require 'timecop'
-require 'database_cleaner'
 require 'yaml'
 
 RSpec.configure do |config|

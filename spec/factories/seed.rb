@@ -3,8 +3,6 @@ FactoryGirl.define do
 
   factory :seed do
     term 'seed'
-    created_at Time.now
-    updated_at Time.now
   end
 
   trait :planted_31_days_ago do
